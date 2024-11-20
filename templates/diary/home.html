@@ -1,0 +1,15 @@
+<!-- diary/templates/diary/home.html -->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Список учеников</h1>
+  <ul>
+    {% for student in students %}
+      <li>
+        <a href="{% url 'student_detail' student.id %}">{{ student.first_name }} {{ student.last_name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+>

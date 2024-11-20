@@ -1,0 +1,30 @@
+<!-- diary/templates/diary/student_detail.html -->
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ student.first_name }} {{ student.last_name }}</h1>
+  <p>Дата рождения: {{ student.date_of_birth }}</p>
+  <p>Контакт родителей: {{ student.parent_contact }}</p>
+  
+  <h2>Оценки</h2>
+  <a href="{% url 'add_grade' student.id %}">Добавить оценку</a>
+  <ul>
+    {% for grade in grades %}
+      <li>{{ grade.subject.name }}: {{ grade.grade }} ({{ grade.date }})</li>
+    {% endfor %}
+  </ul>
+  <p>Средняя оценка: {{ average_grade }}</p>
+  
+  <h2>Комментарии</h2>
+  <a href="{% url 'add_comment' student.id %}">Добавить комментарий</a>
+  <ul>
+    {% for comment in comments %}
+      <li>{{ comment.comment }} ({{ comment.date }})</li>
+    {% endfor %}
+  </ul>
+  
+  <h2>Прогресс</h2>
+  <img src="data:image/png;base64,{{ chart }}" alt="Прогресс ученика">
+  
+{% endblock %}
